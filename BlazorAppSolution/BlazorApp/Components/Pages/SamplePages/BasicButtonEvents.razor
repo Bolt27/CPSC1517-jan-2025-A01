@@ -52,9 +52,9 @@
 <button type="submit" @onclick="OnFlip" class="btn btn-outline-primary">Flip</button>
 
 @code {
-           /*
-           * the comment in the block as everything in this coding block is C#
-           * the directive @code indicates the coding block
+                       /*
+                       * the comment in the block as everything in this coding block is C#
+                       * the directive @code indicates the coding block
     */
 
     /*
@@ -66,10 +66,10 @@
     //this variable is tied to the input control (Id=inputcontrol) via the @bind parameter
     private string inputValue = "";
 
-     /*
-     * the method OnClear is the processing that will be done in response to
-     *  pressing the clear buttons on the page
-     * the method is linked to the button via the @onclick parameter.
+    /*
+    * the method OnClear is the processing that will be done in response to
+    *  pressing the clear buttons on the page
+    * the method is linked to the button via the @onclick parameter.
     */
     private void OnClear()
     {
@@ -78,6 +78,36 @@
 
     private void OnFlip()
     {
-        
+        // PLay the game, Heads (0) or Tails (1)
+        // Use the WelcomeMsg to display the results of the flip.
+
+        WelcomeMsg = ""; // Clear out any old messages
+
+        // Use the Random instance to generate the flip on the computer
+        Random rnd = new Random();
+        int flip = rnd.Next(0, 2); // The generated values will be 0 or 1, 2 is not included.
+
+        if (inputValue.ToUpper().Trim().Equals("H")
+        || inputValue.ToUpper().Trim().Equals("T"))
+        {
+            if (flip == 0)
+            {
+                //Heads
+                if (inputValue.ToUpper().Trim().Equals("H"))
+                {
+                    WelcomeMsg = "You guessed the computer flip, You win!";
+                }
+            }
+            else
+            {
+                // Tails
+                WelcomeMsg = "You did not guess the computer flip, you lose :(";
+            }
+        }
+    else
+        {
+            // invalid data
+            WelcomeMsg = "The value entered is not H or T. Try again";
+        }
     }
 }
